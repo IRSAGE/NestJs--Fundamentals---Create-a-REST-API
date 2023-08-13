@@ -49,14 +49,16 @@ export class AuthService {
 
     //if user does not exist throw exception
     if (!user) {
-      throw new ForbiddenException('Credentials incorrect');
+      throw new ForbiddenException(`No account found with email: ${dto.email}`);
     }
 
     //Compare password
     const pwMatches = await argon.verify(user.hash, dto.password);
     //if password incorrect throw exception
     if (!pwMatches) {
-      throw new ForbiddenException('Credentials incorrect');
+      throw new ForbiddenException(
+        'Credentials incorrect,Please check your password',
+      );
     }
 
     //send back the user
