@@ -8,9 +8,6 @@ export class UserController {
   @Get('me')
   //users/me
   getMe(@Req() req: Request) {
-    console.log({
-      user: req.user,
-    });
-    return { message: 'User Info' };
+    return req.user;
   }
 }
